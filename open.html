@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Open source · Majere</title><meta name="description" content="Open project: fine-tuning a 7–8B open model for Norwegian (Bokmål and Nynorsk) and reliable function calling, sized to run locally on a single 16 GB GPU. Open data, open evaluation, honest compute plan."><link rel="canonical" href="https://majere.thomasaustenaa.no/open.html">
+<meta property="og:type" content="website"><meta property="og:title" content="Open source · Majere"><meta property="og:description" content="Open project: fine-tuning a 7–8B open model for Norwegian (Bokmål and Nynorsk) and reliable function calling, sized to run locally on a single 16 GB GPU. Open data, open evaluation, honest compute plan."><meta property="og:url" content="https://majere.thomasaustenaa.no/open.html"><meta property="og:site_name" content="Majere"><meta name="twitter:card" content="summary">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"></head>
+<body><a class="skip" href="#main">Skip to content</a><header><nav aria-label="Main"><a class="brand" href="index.html">Majere</a><a href="index.html">Overview</a><a href="approach.html">Approach</a><a href="evaluation.html">Data & evaluation</a><a href="roadmap.html">Roadmap</a><a href="compute.html">Compute ask</a><a href="open.html" aria-current="page">Open source</a><a href="team.html">Team & contact</a><a href="reviewers.html">For reviewers</a></nav></header><main id="main">
+
+<h1>Open-source commitment</h1><ul>
+<li><b>Code</b> (training, data processing, evaluation): Apache-2.0, on GitHub.</li>
+<li><b>Weights:</b> LoRA adapters and merged 4-bit models on Hugging Face, under the base model's Apache-2.0 licence.</li>
+<li><b>NO-FC benchmark:</b> CC BY 4.0, with the translation and validation scripts.</li>
+<li><b>Results:</b> every config, seed, log and score, published even when the result is negative.</li>
+<li><b>Data hygiene:</b> only openly licensed sources. Each source's licence is listed in the model card. No personal data is collected.</li></ul>
+<h2>Limitations and safety</h2><p>Small models can still make up tool calls and arguments. NO-FC deliberately measures declining and clarifying, and the model card will document the error rates we measure. The models are for research and local assistants, not for decisions without a human in the loop.</p>
+</main><footer>© 2026 Thomas Austenaa · Independent open project, Norway · Text CC BY 4.0, code Apache-2.0 · Contact <a href="mailto:mail@thomasaustenaa.no">mail@thomasaustenaa.no</a> · <a href="https://github.com/tussienorway/majere-nofc">GitHub</a></footer></body></html>
