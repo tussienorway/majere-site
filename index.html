@@ -1,14 +1,26 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Overview · Majere</title><meta name="description" content="Majere: multi-persona deliberation as an architecture for affect-modulated, self-monitoring language agents. Open, independent research."><link rel="stylesheet" href="style.css"></head><body><header><nav><a class="brand" href="index.html">Majere</a><a href="index.html">Overview</a><a href="research.html">Research</a><a href="results.html">Results</a><a href="compute.html">Compute</a><a href="roadmap.html">Roadmap</a><a href="ethics.html">Ethics &amp; safety</a><a href="about.html">About</a></nav></header><main>
-<h1>Majere: Multi-Persona Deliberation ("Archetype Council") as an Architecture for Affect-Modulated, Self-Monitoring Language Agents</h1>
-<p class="lead">Open, independent research into whether an internal council of personas, with an explicit affect state, makes language agents more consistent, better calibrated and easier to control.</p>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Majere – Archetype Council research</title><meta name="description" content="Majere: open, independent research on multi-persona deliberation as an architecture for affect-modulated, self-monitoring language agents. Falsifiable questions, equal-budget baselines, open results."><link rel="canonical" href="https://tussienorway.github.io/majere-site/">
+<meta property="og:type" content="website"><meta property="og:title" content="Majere – Archetype Council research"><meta property="og:description" content="Majere: open, independent research on multi-persona deliberation as an architecture for affect-modulated, self-monitoring language agents. Falsifiable questions, equal-budget baselines, open results."><meta property="og:url" content="https://tussienorway.github.io/majere-site/"><meta property="og:site_name" content="Majere"><meta name="twitter:card" content="summary">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"></head>
+<body><a class="skip" href="#main">Skip to content</a><header><nav aria-label="Main"><a class="brand" href="index.html">Majere</a><a href="index.html" aria-current="page">Overview</a><a href="research.html">Research</a><a href="related.html">Related work</a><a href="results.html">Results</a><a href="compute.html">Compute</a><a href="reviewers.html">For reviewers</a><a href="roadmap.html">Roadmap</a><a href="ethics.html">Ethics &amp; safety</a><a href="about.html">About</a></nav></header><main id="main">
+<h1>Does an internal "council" of personas make language agents more consistent, better calibrated and easier to control?</h1>
+<p class="lead">Majere: Multi-Persona Deliberation ("Archetype Council") as an Architecture for Affect-Modulated, Self-Monitoring Language Agents.</p>
 <h2>Abstract</h2>
-<p>Majere is an agent architecture in which several "archetype" personas deliberate before the agent acts. The council maintains an internal affect state (valence/arousal) and a tunable impulsivity parameter that trades speed for deliberation. We ask four measurable, falsifiable questions about behavioural consistency, the speed–quality trade-off, calibration and self-monitoring, and functional indicators from the consciousness-science literature. Every comparison is against baselines with the same token budget. We make no claim that the system has feelings or consciousness; negative results will be published.</p>
-<h2>Status</h2>
-<table><tr><th>Item</th><th>Status</th></tr>
-<tr><td>Research questions &amp; falsification criteria</td><td>Written</td></tr>
-<tr><td>Pilot (open 7–8B model, small task subsets)</td><td><span class="tag">IN PROGRESS</span></td></tr>
-<tr><td>Pilot results</td><td><span class="tag">PENDING</span> – no results are claimed yet</td></tr>
-<tr><td>Full evaluation</td><td>Seeking compute</td></tr></table>
-<h2>Related</h2>
-<p>Majere is one project of the independent lab at <a href="https://ai-agenter.no">ai-agenter.no</a>, alongside SafeRoute-Hermes (provenance- and risk-aware model routing). The council can be seen as an internal router: an impulsive path uses a small model, a deliberative path uses the full council or a verifier.</p>
-</main><footer>© 2026 Thomas · Independent research · Contact: <a href="mailto:thomas@austenaa.no">thomas@austenaa.no</a> · Code: <a href="https://github.com/tussienorway/majere-research">github.com/tussienorway/majere-research</a> · Lab: <a href="https://ai-agenter.no">ai-agenter.no</a></footer></body></html>
+<p>In Majere, several archetype personas deliberate before an agent acts. They share a numerical affect state (valence and arousal), and a single impulsivity parameter decides how much deliberation happens. We test four falsifiable claims: that the affect state makes behaviour more consistent, that impulsivity gives a controllable speed–quality trade-off, that the council improves calibration and reduces self-contradiction, and that functional indicators from consciousness science depend on specific components. Every comparison is against baselines with the same token budget, such as self-consistency and multi-agent debate. If the council does not beat them, the hypothesis is rejected and we publish that result. We make no claim that the system has feelings or consciousness.</p>
+<div class="box"><h2 style="margin-top:0;border:0">Why fund this</h2><ul>
+<li><b>Falsifiable by design.</b> There is a pre-stated rejection criterion, and the baselines get the same budget.</li>
+<li><b>Cheap to test, expensive to scale.</b> The pilot runs on a 7–8B open model. Compute is needed to check whether the effects hold at 30–70B.</li>
+<li><b>Open by default.</b> Protocol, evaluation code, configs, raw outputs and negative results are all published under open licences.</li>
+<li><b>Safety-relevant.</b> The work covers calibration, abstention and controllable deliberation, and it treats consciousness claims with care instead of hype.</li></ul></div>
+<h2>Status</h2><div class="tablewrap"><table><tr><th>Item</th><th>Status</th></tr>
+<tr><td>Research questions and falsification criteria</td><td>Written (<a href="https://github.com/tussienorway/majere-research/blob/main/docs/research-plan.md">plan</a>)</td></tr>
+<tr><td>Evaluation protocol</td><td>Written (<a href="https://github.com/tussienorway/majere-research/blob/main/docs/evaluation-protocol.md">protocol</a>)</td></tr>
+<tr><td>Pilot (open 7–8B model)</td><td><span class="tag">IN PROGRESS</span></td></tr>
+<tr><td>Results</td><td><span class="tag">PENDING</span> No results are claimed yet</td></tr></table></div>
+<h2>Start here</h2><div class="cards">
+<a href="reviewers.html"><b>For reviewers →</b><br>Ask, milestones, deliverables on one page.</a>
+<a href="research.html"><b>Research →</b><br>Four questions, metrics, rejection criteria.</a>
+<a href="related.html"><b>Related work →</b><br>Global Workspace, Society of Mind, debate, calibration.</a>
+<a href="https://github.com/tussienorway/majere-research"><b>Open repo →</b><br>Protocol, pilot plan, results, CITATION.cff.</a></div>
+<p>Majere is a project of the independent lab at <a href="https://ai-agenter.no">ai-agenter.no</a>, alongside SafeRoute-Hermes. The core agent implementation is private for now. The protocol, evaluation code and results are public.</p>
+</main><footer>© 2026 Thomas · Independent research · Text CC BY 4.0 · Contact <a href="mailto:thomas@austenaa.no">thomas@austenaa.no</a> · Open research repo <a href="https://github.com/tussienorway/majere-research">majere-research</a> · Lab <a href="https://ai-agenter.no">ai-agenter.no</a></footer></body></html>

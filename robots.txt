@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tussienorway.github.io/majere-site/sitemap.xml
