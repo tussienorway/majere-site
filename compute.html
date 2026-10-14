@@ -4,25 +4,30 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"></head>
 <body><a class="skip" href="#main">Skip to content</a><header><nav aria-label="Main"><a class="brand" href="index.html">Majere</a><a href="index.html">Overview</a><a href="approach.html">Approach</a><a href="evaluation.html">Data & evaluation</a><a href="roadmap.html">Roadmap</a><a href="compute.html" aria-current="page">Compute ask</a><a href="open.html">Open source</a><a href="team.html">Team & contact</a><a href="reviewers.html">For reviewers</a></nav></header><main id="main">
 <h1>Compute request</h1>
-<p><b>Summary:</b> ≈400 A100-80GB GPU-hours (or a TPU v4-8 / v5e slice for 30–60 days) over 9 weeks to fine-tune and distil a 9B open model for Norwegian and reliable tool/computer use, released as open GGUF files that run on a 16 GB consumer GPU. Applicant: Thomas Austenaa, independent researcher, Grimstad, Norway (no institutional affiliation).</p>
-<p><b>Measured on our own GPU (2026-10-13):</b> QLoRA smoke run, Qwen3-8B 4-bit, rank 16, max length 1024, 50 steps on an RTX 5060 Ti 16 GB: peak VRAM 9.41 GiB, 15.3 s/step, ~327 training tokens/s. That is ~1.2M tokens/hour: 10M tokens ≈ 8.5 h, 100M tokens ≈ 85 h, and a single seed of a 300M-token mix ≈ 11 days. Three seeds plus ablations are not feasible on one card, which is the reason for the request. The estimate above will be rescaled from these numbers once the full pilot finishes.</p>
+<p><b>Summary:</b> about 275 H100 GPU-hours (or a TPU v4/v5e equivalent) over ~12 weeks for scaled supervised fine-tuning and ablations of a 7–8B Apache-2.0 model for Norwegian (Bokmål and Nynorsk) and reliable tool calling, after the local pilot on our own GPU. The result is released as open adapters and 4-bit GGUF files that run on one 16 GB GPU. Applicant: Thomas Austenaa, independent researcher, Grimstad, Norway (no institutional affiliation).</p>
+<p><b>How the estimate was made:</b> FLOPs ≈ 6·N·T (N parameters, T training tokens), 35% hardware utilisation, plus a 50% buffer. It will be rescaled once the full pilot has run (<a href="https://github.com/tussienorway/majere-research/blob/main/research-plan.md">research-plan.md</a>).</p>
+<p><b>Pilot base (decided 2026-10-13):</b> Qwen3-8B with thinking off. NorMistral stays as a comparison and for a later fluency check (<a href="approach.html">Approach</a>).</p>
+<p><b>Measured on our own GPU (2026-10-13):</b> QLoRA smoke run, Qwen3-8B 4-bit NF4, rank 16, max length 1024, 50 steps on an RTX 5060 Ti 16 GB: peak VRAM 9.41 GiB, 15.3 s/step, ~327 training tokens/s. That is about 1.2M tokens/hour, so 100M tokens take about 85 hours per seed on that card. Several seeds, data mixes and ablations at that scale are not practical on one card, which is the reason for the request. The full pilot SFT has not been run yet, so there are no fine-tuned results.</p>
 <h2>Evidence so far</h2><ul>
+<li>NO-FC v0 (40 hand-written seed tasks) and v1 (120 tasks, 80/40 dev/test split): <a href="evaluation.html#baseline">Data &amp; evaluation</a> · <a href="https://github.com/tussienorway/majere-nofc/tree/main/results">majere-nofc results</a></li>
+<li>v0, historical: qwen3:8b scored 0.825 (33/40) exact match on the 40 seed tasks.</li>
+<li>NO-FC v1 baselines, no fine-tuning (Ollama, RTX 5060 Ti 16 GB, exact match, test 40 / dev 80): qwen3:8b thinking off, native tools <b>0.825</b> / 0.775; thinking off, prompt tools 0.800 / 0.762; thinking on, native tools 0.800 / 0.688; NorMistral-11B-thinking Q4, prompt tools <b>0.325</b> / 0.287 (call-name accuracy 0.11).</li>
+<li>QLoRA smoke run: Qwen3-8B, 9.41 GiB peak VRAM, 15.3 s/step, ~327 tokens/s (see above).</li>
 <li>Technical preprint (4 pages): <a href="https://github.com/tussienorway/majere-research/blob/main/paper/majere-preprint.pdf">PDF</a> · <a href="https://github.com/tussienorway/majere-research/blob/main/paper/majere-preprint.md">Markdown</a></li>
 <li>Open evaluation set + harness: <a href="https://huggingface.co/datasets/tussienorway/majere-eval-no-tools">huggingface.co/datasets/tussienorway/majere-eval-no-tools</a></li>
-<li>Baseline (measured, RTX 5060 Ti 16 GB): Qwen3.5-9B 98.3% Norwegian, 81.7% right tool, 70.0% exact arguments.</li>
-<li>Negative result (measured): LoRA-finetuned Qwen3.5-4B 90.0% / 63.3% / 53.3%. Local 4B training does not reach the 9B baseline; 9B training with seeds and ablations does not fit our GPU.</li>
-<li>Model cards: <a href="https://github.com/tussienorway/majere-research/tree/main/model-cards">model-cards/</a> · Public demo: <a href="https://huggingface.co/spaces/tussienorway/majere-demo">HF Space</a> · Code: <a href="https://github.com/tussienorway/majere-research">GitHub</a></li></ul>
+<li>Code: <a href="https://github.com/tussienorway/majere-nofc">majere-nofc</a> · Research log and decisions: <a href="https://github.com/tussienorway/majere-research">majere-research</a> · Site: <a href="https://majere.thomasaustenaa.no">majere.thomasaustenaa.no</a></li></ul>
 <h2>Plan and GPU-hours</h2>
-<div class="tablewrap"><table><tr><th>Milestone</th><th>Work</th><th>A100-hours</th></tr>
-<tr><td>M1, wk 1–3</td><td>SFT of Qwen3.5-9B on ≈12K Norwegian instruction + tool-call dialogues; 3 data mixes × 2 seeds; LoRA vs full FT</td><td>90</td></tr>
-<tr><td>M2, wk 3–5</td><td>Agentic / computer-use SFT on multi-step tool and browser/desktop traces</td><td>70</td></tr>
-<tr><td>M3, wk 4–7</td><td>Distillation: ≈30K Norwegian tool trajectories from an open 27–32B teacher, execution-filtered; 3 student runs</td><td>110</td></tr>
-<tr><td>M4, wk 6–8</td><td>Ablations: data mix, affect/council layer on/off, 4B/9B/14B scaling point</td><td>70</td></tr>
-<tr><td>M5, wk 8–9</td><td>Evaluation at scale (3 trials, BFCL, NorEval/EuroEval) and GGUF quantisation (Q4_K_M, Q5_K_M, Q6_K, IQ4_XS)</td><td>30</td></tr>
-<tr><td>Buffer</td><td>Failed runs and re-runs</td><td>30</td></tr>
-<tr><th colspan="2">Total</th><th>≈400</th></tr></table></div>
-<p><b>Success criterion:</b> 9B student ≥95% Norwegian and ≥80% exact arguments (baseline 70%), no BFCL regression, fits 16 GB at Q4_K_M with ≥32K context. These are planning estimates; the GPU-hours will be replaced by measured numbers after M1.</p>
+<div class="tablewrap"><table><tr><th>Milestone</th><th>Work</th><th>H100-hours</th></tr>
+<tr><td>Pilot, wk 1–4</td><td>Already under way on our own 16 GB GPU: NO-FC baselines and QLoRA smoke run done; full pilot SFT on a small mix to follow</td><td>0 (own GPU)</td></tr>
+<tr><td>M1, wk 5–8</td><td>Scaled Norwegian + function-calling SFT of Qwen3-8B: data mixes × seeds</td><td>120</td></tr>
+<tr><td>M2, wk 7–10</td><td>Ablations: with and without Nynorsk, with and without decline/clarify examples, optional Norwegian adaptation</td><td>70</td></tr>
+<tr><td>M3, wk 10–11</td><td>Evaluation: NorEval, EuroEval, BFCL and NO-FC against untouched bases, multiple seeds</td><td>30</td></tr>
+<tr><td>M4, wk 11–12</td><td>Merge, GGUF quantisation and 16 GB check; model cards and technical report</td><td>15</td></tr>
+<tr><td>Buffer</td><td>Failed runs and re-runs</td><td>40</td></tr>
+<tr><th colspan="2">Total</th><th>≈275</th></tr></table></div>
+<p><b>Success criterion:</b> NO-FC improves over the untouched base models without NorEval dropping beyond seed noise, and the model fits 16 GB at 4-bit. Results are published either way. The GPU-hour split above is a planning estimate and will be updated after the full pilot.</p>
 <h2>Open-licence commitment</h2>
 <p>Code MIT, docs/results/eval set CC BY 4.0, adapters/weights/GGUF under the base model licence (Apache-2.0), with training configs, logs and raw eval outputs. Support will be acknowledged by name in model cards, the repository and the preprint.</p>
-<h2>Applications</h2><ul><li>Google TPU Research Cloud: submitted 12 Oct 2026</li><li>Lambda Research Grant: submitted 12 Oct 2026</li><li>Hugging Face community GPU grant: requested on the Space</li><li>EuroHPC AI for Science: in preparation (eligibility being checked)</li></ul>
+<h2>Applications</h2><ul><li>Google TPU Research Cloud: submitted 12 Oct 2026</li><li>Lambda Research Grant: submitted 12 Oct 2026 (confirmation received)</li><li>Hugging Face community GPU grant: requested 13 Oct 2026 via the Space (<a href="https://huggingface.co/spaces/tussienorway/majere-demo/discussions/1">discussion 1</a>)</li><li>CloudRift AI Grant: submitted 13 Oct 2026 (application received)</li><li>EuroHPC AI for Science: in progress. Host request sent to Per-Arne Andersen (UiA); deadline 30 Oct 2026, 10:00 CET</li></ul>
+<p>No grant has been awarded yet. The estimates on this page will be updated after the full pilot.</p>
 </main><footer>© 2026 Thomas Austenaa · Independent open project, Norway · Text CC BY 4.0, code Apache-2.0 · Contact <a href="mailto:mail@thomasaustenaa.no">mail@thomasaustenaa.no</a> · <a href="https://github.com/tussienorway/majere-nofc">GitHub</a></footer></body></html>
